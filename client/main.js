@@ -12,7 +12,7 @@ import './main.html';
 
 Template.body.helpers({
   posts() {
-    return Posts.find({});
+    return Posts.find({}, { sort: { createdAt: -1 } });
   }
 
 });
@@ -31,9 +31,7 @@ Template.add.events({
     //clear form
     target.text.value = '';
 
-    //close modal
-    $('#addModal').modal('close');
-        
+
     return false;
   }
 })

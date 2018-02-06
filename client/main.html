@@ -1,66 +1,51 @@
 <head>
   <title>Posts Board</title>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Roboto font embed -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+
 </head>
 
 <body>
-  <nav class="red">
+  <header>
     <div class="container">
-      <div class="nav-wrapper">
-        <a href="#" class="brand-logo">PostsManager</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li class="nav-item">
-            {{>loginButtons}}
-          </li>
-          {{#if currentUser}}
-          <li class="nav-item">
-            <a class="waves-effect waves-light btn modal-trigger" href="#addPost">{{>add}}</a>
-          </li>
-          {{/if}}
-        </ul>
+      {{#if currentUser}}
+      {{>add}}
+      {{/if}}
+      <div class="login-item">
+        {{>loginButtons}}
       </div>
     </div>
-  </nav>
+  </header>
 
-  <div class="container">
-    <h1>Latest Posts</h1>
+  <div class="container-posts">
     {{#if currentUser}}
+    <h1>Latest posts:</h1>
     <ul class="collection">
       {{#each posts}} {{>post}} {{/each}}
     </ul>
     {{else}}
-    <p>Please log in to manage posts</p>
+    <p>You need to be logged in to manage posts!</p>
     {{/if}}
   </div>
 
 
-  <script>
-    $(document).ready(function () {
-      $('.modal').modal();
-    });
-  </script>
 </body>
 
 <template name="post">
   <li class="collection-item">
-    {{text}}:<strong>Added by {{username}}</strong>
-    <a href="#" class="delete-note secondary-content">
-      <i class="material-icons">
-        close
-      </i>
-    </a>
+    <div class="collection-container">
+      <div>
+        {{text}}:  <strong>by {{username}}</strong>
+      </div>
+      <button class="delete-note">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAYAAACpSkzOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFCSURBVEhL7dbPKwRxHMbxjx9J+V0OkignF0mu/gMHp434I9xEbuRGjnKWCxcHd8V/4EzaEkopHBwceD8fs/XdMdr97sxxnnodnpn5zmdmdrcdayJtWMMtvgOfuMQMCsk6wgFp7xhHrrTjDTrhMjpQSz/OoX372hCTTgwFZqETPQfbQqvQfj3CcLsu4t/o6u+ghUXYxJ/oA59A1oJWnaEHdRlA1sF5naAufdBju4cO+Ep62gteEw/JttATtP4j6QfITO3Oqt7is4DMO0knPUjfwkmMeTPrgvqoN7NuqI94yzFIP0T1G29m01C/9mY2D/ULb+UglIPKQeWg4gYN4xR73n4Hq297M5uC+oa3iEG90IGP3uKzCK0/9tYguhsdvINKhBVcQWu30DBL0B+fFrRC73+DaCpz2MVRhEPoRTPjDcjsB0YqCBoim7erAAAAAElFTkSuQmCC">
+      </button>
+    </div>
   </li>
 </template>
 
-
 <template name="add">
-  <!-- Modal Structure -->
-  <div id="addModal" class="modal">
-    <div class="modal-content">
-      <h3>Add Post</h3>
-      <form class="add-form">
-        <input type="text" name="text" placeholder="Add post...">
-      </form>
-    </div>
-  </div>
+  <form class="add-form">
+    <input type="text" name="text" placeholder="Add post...">
+  </form>
 </template>
